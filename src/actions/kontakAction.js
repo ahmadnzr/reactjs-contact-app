@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const GET_LIST_KONTAK = "GET_LIST_KONTAK";
+export const ADD_KONTAK = "ADD_KONTAK";
 
 export const getListKontak = () => {
   return (dispatch) => {
@@ -35,6 +36,50 @@ export const getListKontak = () => {
         // gagal
         dispatch({
           type: GET_LIST_KONTAK,
+          payload: {
+            loading: false,
+            data: false,
+            errorMessage: err.message,
+          },
+        });
+      });
+  };
+};
+
+export const addKontak = (data) => {
+  return (dispatch) => {
+    // loading
+    dispatch({
+      type: ADD_KONTAK,
+      payload: {
+        loading: true,
+        data: false,
+        errorMessage: false,
+      },
+    });
+
+    // get API
+    axios({
+      method: "POST",
+      url: "http://localhost:5000/contacts",
+      timeout: 120000,
+      data: data,
+    })
+      .then((response) => {
+        // berhasil
+        dispatch({
+          type: ADD_KONTAK,
+          payload: {
+            loading: false,
+            data: response.data,
+            errorMessage: false,
+          },
+        });
+      })
+      .catch((err) => {
+        // gagal
+        dispatch({
+          type: ADD_KONTAK,
           payload: {
             loading: false,
             data: false,
