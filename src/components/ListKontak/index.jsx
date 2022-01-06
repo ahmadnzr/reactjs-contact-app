@@ -1,7 +1,11 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { getListKontak, deleteKontak } from "../../actions/kontakAction";
+import {
+  getListKontak,
+  deleteKontak,
+  detailKontak,
+} from "../../actions/kontakAction";
 
 function ListKontak() {
   const { results, loading, error, deleteResults } = useSelector(
@@ -29,6 +33,9 @@ function ListKontak() {
               {kontak.name} - {kontak.number} -{" "}
               <button onClick={() => dispatch(deleteKontak(kontak.id))}>
                 Hapus
+              </button>
+              <button onClick={() => dispatch(detailKontak(kontak))}>
+                Edit
               </button>
             </p>
           );

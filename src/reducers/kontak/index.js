@@ -2,6 +2,8 @@ import {
   GET_LIST_KONTAK,
   ADD_KONTAK,
   DELETE_KONTAK,
+  DETAIL_KONTAK,
+  UPDATE_KONTAK,
 } from "../../actions/kontakAction";
 
 const initialState = {
@@ -16,6 +18,12 @@ const initialState = {
   deleteResults: false,
   deleteLoading: false,
   deleteError: false,
+
+  detailResult: false,
+
+  updateResults: false,
+  updateLoading: false,
+  updateError: false,
 };
 
 const kontak = (state = initialState, action) => {
@@ -40,6 +48,18 @@ const kontak = (state = initialState, action) => {
         deleteResults: action.payload.data,
         deleteLoading: action.payload.loading,
         deleteError: action.payload.errorMessage,
+      };
+    case DETAIL_KONTAK:
+      return {
+        ...state,
+        detailResult: action.payload.data,
+      };
+    case UPDATE_KONTAK:
+      return {
+        ...state,
+        updateResults: action.payload.data,
+        updateLoading: action.payload.loading,
+        updateError: action.payload.errorMessage,
       };
     default:
       return state;
